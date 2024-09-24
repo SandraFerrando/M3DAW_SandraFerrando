@@ -23,7 +23,9 @@ class Mom:
         return "El teu nom complet es " + self.name + " " + self.firstName + " " + self.lastName
 
 class Child(Dad, Mom):
-    def __init__(self, name):
+    def __init__(self, name, firstName, lastName):
+        Dad.__init__(self, firstName, lastName, name)
+        Mom.__init__(self, firstName, lastName, name)
         self.name = name
 
     def getFullName(self):
@@ -33,7 +35,7 @@ class Child(Dad, Mom):
 
 #Test
 
-child = Child("Xavi")
+child = Child("Sandra")
 print(child.getFullName())
 print(child.getDadFullName())
 print(child.getMomFullName())
