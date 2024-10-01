@@ -1,28 +1,41 @@
-class Parent:
-    def __init__(self, first_name, last_name, second_last_name=None):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.second_last_name = second_last_name
+class Dad:
+    def __init__(self, firstName="Galcera", lastName="Ferrando", name="Marc"):
+        self.firstName = firstName
+        self.lastName = lastName
+        self.name = name
 
-    def getFullName(self):
-        if self.second_last_name:
-            return f"{self.first_name} {self.last_name} {self.second_last_name}"
-        return f"{self.first_name} {self.last_name}"
-
-class Child:
-    def __init__(self, first_name, dad_first_name="Marc", dad_last_name="Ferrando", dad_second_last_name="Galcera", mom_first_name="Teresa", mom_last_name="Espuny", mom_second_last_name="Escriba"):
-        self.first_name = first_name
-        self.dad = Parent(dad_first_name, dad_last_name, dad_second_last_name)
-        self.mom = Parent(mom_first_name, mom_last_name, mom_second_last_name)
-
-    def getFullName(self):
-        return f"{self.first_name} {self.dad.last_name} {self.mom.last_name}"
+    def getDadFirstName(self):
+        return self.firstName
 
     def getDadFullName(self):
-        return f"El nom complet del meu pare és {self.dad.getFullName()}"
+        return f"{self.firstName} {self.lastName} {self.name}"
+
+class Mom:
+    def __init__(self, firstName="Escriba", lastName="Espuny", name="Teresa"):
+        self.firstName = firstName
+        self.lastName = lastName
+        self.name = name
+
+    def getMomFirstName(self):
+        return self.firstName
 
     def getMomFullName(self):
-        return f"El nom complet de la meva mare és {self.mom.getFullName()}"
+        return f"{self.firstName} {self.lastName} {self.name}"
+
+class Child(Dad, Mom):
+    def __init__(self, name):
+        Dad.__init__(self)
+        Mom.__init__(self)
+        self.name = name
+
+    def getFullName(self):
+        return f"{self.name} {Dad.lastName} {Mom.lastName}"
+
+    def getDadFullName(self):
+        return Dad.getDadFullName(self)
+
+    def getMomFullName(self):
+        return Mom.getMomFullName(self)
 
 # Test
 child = Child("Sandra")
